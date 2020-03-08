@@ -13,6 +13,7 @@ const vkTheme = {
 		if (!this.inited) {
 			window.addEventListener('message', this.handler);
 			this.inited = true;
+			this.send('init_extension_theme');
 		}
 	},
 	unscribe: function (callback = null) {
@@ -36,7 +37,10 @@ const vkTheme = {
 		this.inited = false;
 	},
 	get: function () {
-		top.postMessage({type: 'get_extension_theme'}, 'https://vk.com');
+		this.send('get_extension_theme');
+	},
+	send: function (type) {
+		top.postMessage({type: type}, 'https://vk.com');
 	}
 };
 
